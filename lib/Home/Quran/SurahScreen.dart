@@ -32,7 +32,10 @@ class _SurahScreenState extends State<SurahScreen> {
               ),
             ),
             body: verses.length == 0
-                ? Center(child: CircularProgressIndicator())
+                ? Center(
+                    child: CircularProgressIndicator(
+                    color: Theme.of(context).primaryColor,
+                  ))
                 : Container(
                     padding: EdgeInsets.all(15),
                     margin: EdgeInsets.symmetric(

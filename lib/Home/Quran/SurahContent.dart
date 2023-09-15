@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-
 class SurahContent extends StatelessWidget {
   String content;
   int index;
-
   SurahContent({required this.content, required this.index});
 
   @override
