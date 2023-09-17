@@ -1,24 +1,36 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:islami/Home/Hadeeth/HadeethScreen.dart';
 import 'package:islami/Home/Quran/SurahScreen.dart';
 import 'package:islami/HomeScreen.dart';
 import 'package:islami/MainTheme.dart';
+import 'package:islami/provider/app_config_provider.dart';
+import 'package:provider/provider.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(ChangeNotifierProvider(
+      create: (context) => AppConfigProvider(), child: MyApp()));
 }
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    var provider = Provider.of<AppConfigProvider>(context);
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       initialRoute: HomeScreen.routeName,
+      locale: Locale(provider.appLanguage),
+      localizationsDelegates: AppLocalizations.localizationsDelegates,
+      supportedLocales: AppLocalizations.supportedLocales,
       routes: {
         HomeScreen.routeName: (context) => HomeScreen(),
         SurahScreen.routeName: (context) => SurahScreen(),
+        HadeethScreen.routeName: (context) => HadeethScreen(),
       },
       theme: MainTheme.lightMode,
+      darkTheme: MainTheme.darkMode,
+      themeMode: provider.appTheme,
     );
   }
 }
