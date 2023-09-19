@@ -45,8 +45,10 @@ dev_dependencies:
   flutter_native_splash: ^2.3.2
 
 flutter_native_splash:
-  background_image_dark: assets/images/dark_splash.png
-  background_image: assets/images/Splash.png
+
+  background_image: "assets/images/Splash.png"
+  background_image_dark: "assets/images/dark_splash.png"
+
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is

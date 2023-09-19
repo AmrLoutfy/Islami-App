@@ -58,6 +58,15 @@ class _LanguageBottomSheetState extends State<LanguageBottomSheet> {
   }
 
   Widget getUnSelectedItemWidget(String text) {
-    return Text("$text", style: Theme.of(context).textTheme.titleMedium);
+    var provider = Provider.of<AppConfigProvider>(context);
+
+    return Text("$text",
+        style: provider.IsDarkMode()
+            ? Theme.of(context)
+                .textTheme
+                .titleMedium!
+                .copyWith(color: Color(0xffB7935F))
+            : Theme.of(context).textTheme.titleMedium);
+    ;
   }
 }
