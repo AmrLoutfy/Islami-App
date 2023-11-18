@@ -10,6 +10,8 @@ class TasbeehTab extends StatefulWidget {
 class _TasbeehTabState extends State<TasbeehTab> {
   int sebha = 0;
   double rotationAngle = 0;
+
+  List<String> displayTexts = ['سبحان الله', 'الحمد لله', 'لا اله الا الله'];
   String tasbeeh = "سبحان الله";
 
   @override
@@ -20,20 +22,86 @@ class _TasbeehTabState extends State<TasbeehTab> {
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          provider.IsDarkMode()
-              ? Expanded(
-                  child: Transform.rotate(
-                      angle: rotationAngle,
-                      child: Image.asset("assets/images/Group 8.png")),
-                )
-              : Expanded(
-                  child: Transform.rotate(
-                    angle: rotationAngle,
-                    child: Image.asset(
-                      "assets/images/Group 7.png",
+          Stack(
+            alignment: Alignment.topCenter,
+            children: [
+              provider.IsDarkMode()
+                  ? Container(
+                      margin: EdgeInsets.all(10),
+                      child: Expanded(
+                        flex: 0,
+                        child:
+                            Image.asset("assets/images/dark_head_of_seb7a.png"),
+                      ),
+                    )
+                  : Container(
+                      margin: EdgeInsets.all(10),
+                      child: Expanded(
+                        flex: 0,
+                        child: Image.asset(
+                          "assets/images/head_of_seb7a.png",
+                        ),
+                      ),
                     ),
-                  ),
-                ),
+              provider.IsDarkMode()
+                  ? Container(
+                      margin: EdgeInsets.fromLTRB(0, 88, 0, 0),
+                      child: Expanded(
+                        flex: 0,
+                        child: Transform.rotate(
+                            angle: rotationAngle,
+                            child: GestureDetector(
+                                onTap: () {
+                                  sebha++;
+
+                                  if (sebha % 33 == 0) {
+                                    if (tasbeeh == "سبحان الله") {
+                                      tasbeeh = displayTexts[1];
+                                    } else if (tasbeeh == displayTexts[1]) {
+                                      tasbeeh = displayTexts[2];
+                                    } else if (tasbeeh == displayTexts[2]) {
+                                      tasbeeh = displayTexts[0];
+                                    }
+                                  }
+                                  rotationAngle = rotationAngle + 0.15;
+                                  setState(() {});
+                                },
+                                child: Image.asset(
+                                    "assets/images/dark_body_of_seb7a.png"))),
+                      ),
+                    )
+                  : Container(
+                      margin: EdgeInsets.fromLTRB(0, 88, 0, 0),
+                      child: Expanded(
+                        flex: 0,
+                        child: Transform.rotate(
+                          angle: rotationAngle,
+                          child: GestureDetector(
+                            onTap: () {
+                              sebha++;
+
+                              if (sebha % 33 == 0) {
+                                if (tasbeeh == "سبحان الله") {
+                                  tasbeeh = displayTexts[1];
+                                } else if (tasbeeh == displayTexts[1]) {
+                                  tasbeeh = displayTexts[2];
+                                } else if (tasbeeh == displayTexts[2]) {
+                                  tasbeeh = displayTexts[0];
+                                }
+                              }
+
+                              rotationAngle = rotationAngle + 0.15;
+                              setState(() {});
+                            },
+                            child: Image.asset(
+                              "assets/images/body_of_seb7a.png",
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+            ],
+          ),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -86,22 +154,7 @@ class _TasbeehTabState extends State<TasbeehTab> {
                             backgroundColor: provider.IsDarkMode()
                                 ? MaterialStatePropertyAll(Colors.yellow)
                                 : MaterialStatePropertyAll(Color(0xffB7935F))),
-                        onPressed: () {
-                          if (sebha == 99) {
-                            sebha = 0;
-                          } else {
-                            sebha++;
-                          }
-                          if (sebha <= 33) {
-                            tasbeeh = "سبحان الله";
-                          } else if (sebha > 33 && sebha <= 66) {
-                            tasbeeh = "الحمد لله";
-                          } else if (sebha > 66 && sebha <= 99) {
-                            tasbeeh = "الله أكبر";
-                          }
-                          rotationAngle = rotationAngle + 0.15;
-                          setState(() {});
-                        },
+                        onPressed: () {},
                         child: Text("$tasbeeh",
                             style: provider.IsDarkMode()
                                 ? Theme.of(context)
